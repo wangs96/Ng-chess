@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChessBoardComponent } from './chess-board/chess-board.component';
 
 @Component({
@@ -9,6 +9,16 @@ import { ChessBoardComponent } from './chess-board/chess-board.component';
   directives: [ChessBoardComponent]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  //Block select element from mouse moving
+  init() {
+    window.addEventListener('mousemove', function(event) {
+      event.preventDefault();
+    });
+  }
+
+  ngOnInit() {
+    this.init();
+  }
 }

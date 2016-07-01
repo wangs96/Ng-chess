@@ -1,6 +1,7 @@
 .container {
   width: 800px;
-  margin: 30px auto;
+  margin: 50px auto;
+  position: relative;
 }
 
 .chess-board {
@@ -151,4 +152,12 @@
   height: 20px;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
+}
+
+.piece-board {
+  width: 900px;
+  height: 900px;
+  position: absolute;
+  top: -40px;
+  left: -40px;
 }

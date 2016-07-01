@@ -34,6 +34,13 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/chess-board',
+  'app/piece-minion',
+  'app/piece-cannon',
+  'app/piece-chariot',
+  'app/piece-horse',
+  'app/piece-minister',
+  'app/piece-guard',
+  'app/piece-marshal',
   /** @cli-barrel */
 ];
 
