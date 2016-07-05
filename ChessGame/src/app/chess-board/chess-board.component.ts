@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { PieceMinionComponent } from '../piece-minion/piece-minion.component';
 import { PieceCannonComponent } from '../piece-cannon/piece-cannon.component';
 import { PieceChariotComponent } from '../piece-chariot/piece-chariot.component';
@@ -17,52 +17,114 @@ import { PieceMarshalComponent } from '../piece-marshal/piece-marshal.component'
 })
 export class ChessBoardComponent implements OnInit {
 
-  private coordinate;
+  @ViewChildren(PieceMinionComponent)
+  private minionComponents;
+
+  @ViewChildren(PieceCannonComponent)
+  private cannonComponents;
+
+  @ViewChildren(PieceChariotComponent)
+  private chariotComponents;
+
+  @ViewChildren(PieceHorseComponent)
+  private horseComponents;
+
+  @ViewChildren(PieceMinisterComponent)
+  private ministerComponents;
+
+  @ViewChildren(PieceGuardComponent)
+  private guardComponents;
+
+  @ViewChildren(PieceMarshalComponent)
+  private marshalComponents;
+
+  public coordinate = [];
 
   constructor() {}
 
   ngOnInit() {
-    this.initCoordinate();
+    this.initBoardCoordinate();
   }
 
-  initCoordinate() {
-    this.coordinate = {
-      black: {
-        'minion-1': [0, 3],
-        'minion-2': [2, 3],
-        'minion-3': [4, 3],
-        'minion-4': [6, 3],
-        'minion-5': [8, 3],
-        'cannon-1': [1, 2],
-        'cannon-2': [7, 2],
-        'chariot-1': [0, 0],
-        'chariot-2': [8, 0],
-        'horse-1': [1, 0],
-        'horse-2': [7, 0],
-        'minister-1': [2, 0],
-        'minister-2': [6, 0],
-        'guard-1': [3, 0],
-        'guard-2': [5, 0],
-        'marshal': [4, 0]
-      },
-      red: {
-        'minion-1': [0, 6],
-        'minion-2': [2, 6],
-        'minion-3': [4, 6],
-        'minion-4': [6, 6],
-        'minion-5': [8, 6],
-        'cannon-1': [1, 7],
-        'cannon-2': [7, 7],
-        'chariot-1': [0, 9],
-        'chariot-2': [8, 9],
-        'horse-1': [1, 9],
-        'horse-2': [7, 9],
-        'minister-1': [2, 9],
-        'minister-2': [6, 9],
-        'guard-1': [3, 9],
-        'guard-2': [5, 9],
-        'marshal': [4, 9]
+  ngAfterViewInit() {
+    this.initPieceCoordinate();
+  }
+
+  initPieceCoordinate() {
+    this.setPieceInfo(this.minionComponents.toArray(), 5, (index, roleFlag) => {
+      return roleFlag?[index * 2, 3]: [index * 2, 6];
+    });
+
+    this.setPieceInfo(this.cannonComponents.toArray(), 2, (index, roleFlag) => {
+      return roleFlag?[index * 6 + 1, 2]: [index * 6 + 1, 7];
+    });
+
+    this.setPieceInfo(this.chariotComponents.toArray(), 2, (index, roleFlag) => {
+      return roleFlag?[index * 8, 0]: [index * 8, 9];
+    });
+
+    this.setPieceInfo(this.horseComponents.toArray(), 2, (index, roleFlag) => {
+      return roleFlag?[index * 6 + 1, 0]: [index * 6 + 1, 9];
+    });
+
+    this.setPieceInfo(this.ministerComponents.toArray(), 2, (index, roleFlag) => {
+      return roleFlag?[index * 4 + 2, 0]: [index * 4 + 2, 9];
+    });
+
+    this.setPieceInfo(this.guardComponents.toArray(), 2, (index, roleFlag) => {
+      return roleFlag?[index * 2 + 3, 0]: [index * 2 + 3, 9];
+    });
+    this.setPieceInfo(this.marshalComponents.toArray(), 1, (index, roleFlag) => {
+      return roleFlag?[index + 4, 0]: [index + 4, 9];
+    });
+  }
+
+  initBoardCoordinate() {
+    this.coordinate = generateCoordinate();
+
+    function generateCoordinate() {
+      var coordinate = [];
+      for(var i = 0; i < 10; i++) {
+        for(var l = 0; l < 9; l++) {
+          coordinate.push({
+            id: '' + l + i,
+            coordinate: [l, i],
+            piece: null
+          });
+        }
       }
-    };
+      return coordinate;
+    }
+  }
+
+  setPieceInfo(pieces, breakIndex, coordinateFunc) {
+    pieces.forEach((piece, index) => {
+      var boardCoord;
+      if(index < breakIndex) {
+        piece.setRole('black');
+        piece.setCoordinate(coordinateFunc(index, true));
+        boardCoord = this.getCoordInfo(coordinateFunc(index, true));
+      }
+      else {
+        piece.setRole('red');
+        piece.setCoordinate(coordinateFunc(index - breakIndex, false));
+        boardCoord = this.getCoordInfo(coordinateFunc(index - breakIndex, false));
+      }
+
+      boardCoord.piece = piece;
+    });
+  }
+
+  getCoordInfo(coordinate) {
+    var coordObj = {};
+    var coordObjId = '' + coordinate[0] + coordinate[1];
+
+    this.coordinate.forEach((coord) => {
+      if(coord.id === coordObjId) {
+        coordObj = coord;
+      }
+    });
+
+    return coordObj;
   }
 }

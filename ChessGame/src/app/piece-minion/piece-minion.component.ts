@@ -3,13 +3,13 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'app-piece-minion',
-  templateUrl: 'piece-minion.component.html',
-  styleUrls: ['piece-minion.component.css']
+  templateUrl: '../shared/pieceTemplate.html',
+  styleUrls: ['../shared/pieceStyle.css', 'piece-minion.component.css']
 })
 export class PieceMinionComponent implements OnInit {
 
-  @Input()
-  coordinate;
+  public coordinate = [];
+  public role: string;
 
   content:string = '卒';
 
@@ -17,6 +17,14 @@ export class PieceMinionComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  setCoordinate(coordinate) {
+    this.coordinate = coordinate;
+  }
+
+  setRole(role) {
+    this.role = role;
   }
 
 }

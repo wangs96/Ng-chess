@@ -161,3 +161,9 @@
   top: -40px;
   left: -40px;
 }
+
+.board-tile {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}

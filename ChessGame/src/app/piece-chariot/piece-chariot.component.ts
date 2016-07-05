@@ -3,13 +3,13 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'app-piece-chariot',
-  templateUrl: 'piece-chariot.component.html',
-  styleUrls: ['piece-chariot.component.css']
+  templateUrl: '../shared/pieceTemplate.html',
+  styleUrls: ['../shared/pieceStyle.css', 'piece-chariot.component.css']
 })
 export class PieceChariotComponent implements OnInit {
 
-  @Input()
-  coordinate;
+  public coordinate = [];
+  public role: string;
 
   content:string = '車';
 
@@ -17,6 +17,14 @@ export class PieceChariotComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  setCoordinate(coordinate) {
+    this.coordinate = coordinate;
+  }
+
+  setRole(role) {
+    this.role = role;
   }
 
 }

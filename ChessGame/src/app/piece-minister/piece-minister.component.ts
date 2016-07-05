@@ -3,13 +3,13 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'app-piece-minister',
-  templateUrl: 'piece-minister.component.html',
-  styleUrls: ['piece-minister.component.css']
+  templateUrl: '../shared/pieceTemplate.html',
+  styleUrls: ['../shared/pieceStyle.css', 'piece-minister.component.css']
 })
 export class PieceMinisterComponent implements OnInit {
 
-  @Input()
-  coordinate;
+  public coordinate = [];
+  public role: string;
 
   content:string = '相';
 
@@ -17,6 +17,14 @@ export class PieceMinisterComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  setCoordinate(coordinate) {
+    this.coordinate = coordinate;
+  }
+
+  setRole(role) {
+    this.role = role;
   }
 
 }

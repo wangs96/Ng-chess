@@ -3,13 +3,13 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'app-piece-guard',
-  templateUrl: 'piece-guard.component.html',
-  styleUrls: ['piece-guard.component.css']
+  templateUrl: '../shared/pieceTemplate.html',
+  styleUrls: ['../shared/pieceStyle.css', 'piece-guard.component.css']
 })
 export class PieceGuardComponent implements OnInit {
 
-  @Input()
-  coordinate;
+  public coordinate = [];
+  public role: string;
 
   content:string = '士';
 
@@ -17,6 +17,14 @@ export class PieceGuardComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  setCoordinate(coordinate) {
+    this.coordinate = coordinate;
+  }
+
+  setRole(role) {
+    this.role = role;
   }
 
 }
