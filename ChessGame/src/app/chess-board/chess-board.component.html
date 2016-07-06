@@ -252,7 +252,7 @@
     <app-piece-guard></app-piece-guard>
     <app-piece-marshal></app-piece-marshal>
 
-    <div class="board-tile" *ngFor="let tile of coordinate"
-         [ngStyle]="{'left': tile.coordinate[0]*100 + 'px', 'top': tile.coordinate[1]*100 + 'px'}"></div>
+    <div class="board-tile" *ngFor="let tile of coordinate" (click)="clickTile(tile)"
+         [ngStyle]="{'left': tile.coordinate[0]*100 - 7 + 'px', 'top': tile.coordinate[1]*100 - 7 + 'px'}"></div>
   </div>
 </div>

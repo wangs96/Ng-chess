@@ -10,6 +10,8 @@ export class PieceMarshalComponent implements OnInit {
 
   public coordinate = [];
   public role: string;
+  public selected: boolean = false;
+  public destroyed: boolean = false;
 
   content:string = '帅';
 

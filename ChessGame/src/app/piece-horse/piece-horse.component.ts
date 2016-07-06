@@ -10,7 +10,8 @@ export class PieceHorseComponent implements OnInit {
 
   public coordinate = [];
   public role: string;
-
+  public selected: boolean = false;
+  public destroyed: boolean = false;
 
   content:string = '馬';
 

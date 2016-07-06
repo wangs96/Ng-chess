@@ -39,6 +39,9 @@ export class ChessBoardComponent implements OnInit {
   private marshalComponents;
 
   public coordinate = [];
+  public mode: string = 'single';
+  private selectedPiece = null;
+  private currentRole: string = 'red';
 
   constructor() {}
 
@@ -116,7 +119,7 @@ export class ChessBoardComponent implements OnInit {
   }
 
   getCoordInfo(coordinate) {
-    var coordObj = {};
+    var coordObj;
     var coordObjId = '' + coordinate[0] + coordinate[1];
 
     this.coordinate.forEach((coord) => {
@@ -125,6 +128,60 @@ export class ChessBoardComponent implements OnInit {
       }
     });
 
-    return coordObj;
+    return coordObj || {};
   }
+
+  clickTile(coordInfo) {
+    console.log(coordInfo);
+
+    if(coordInfo.piece) {
+      if(coordInfo.piece.role === this.currentRole) {
+        this.unselectedPieces();
+        coordInfo.piece.selected = true;
+        this.selectedPiece = coordInfo.piece;
+      }
+      else {
+        if(this.selectedPiece) {
+          //Eat enemy piece
+          this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
+          this.selectedPiece.setCoordinate(coordInfo.coordinate);
+          coordInfo.piece.destroyed = true;
+          coordInfo.piece = this.selectedPiece;
+          this.switchGamer();
+        }
+
+        this.unselectedPieces();
+      }
+    }
+    else {
+      if(this.selectedPiece) {
+        //move piece
+        this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
+        this.selectedPiece.setCoordinate(coordInfo.coordinate);
+        coordInfo.piece = this.selectedPiece;
+        this.switchGamer();
+      }
+
+      this.unselectedPieces();
+    }
+  }
+
+  unselectedPieces() {
+    this.coordinate.forEach((coord) => {
+      if(coord.piece) {
+        coord.piece.selected = false;
+      }
+    });
+
+    this.selectedPiece = null;
+  }
+
+  switchGamer() {
+    if(this.mode === 'single') {
+      this.currentRole = this.currentRole === 'red'?'black':'red';
+      console.log('This is ' + this.currentRole + ' turn.');
+    }
+
+  }
+
 }

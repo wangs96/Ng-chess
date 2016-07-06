@@ -7,7 +7,8 @@
   font-weight: 900;
   border: 2px solid rgb(169, 124, 93);
   background: radial-gradient(rgb(255, 255, 255), rgb(204, 143, 101));
-  z-index: 10;
+  opacity: 1;
+  transition: all 1s;
 }
 
 .content {
@@ -22,4 +23,12 @@
 
 .red {
   color: rgb(255, 4, 0);
+}
+
+.selected {
+  border-color: black;
+}
+
+.destroyed {
+  opacity: 0;
 }

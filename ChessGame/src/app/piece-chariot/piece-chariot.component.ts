@@ -10,6 +10,8 @@ export class PieceChariotComponent implements OnInit {
 
   public coordinate = [];
   public role: string;
+  public selected: boolean = false;
+  public destroyed: boolean = false;
 
   content:string = '車';
 
