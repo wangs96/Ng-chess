@@ -29,4 +29,8 @@ export class PieceHorseComponent implements OnInit {
     this.role = role;
   }
 
+  validateMove() {
+    return true;
+  }
+
 }

@@ -29,4 +29,7 @@ export class PieceMinisterComponent implements OnInit {
     this.role = role;
   }
 
+  validateMove() {
+    return true;
+  }
 }

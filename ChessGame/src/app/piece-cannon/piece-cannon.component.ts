@@ -29,4 +29,8 @@ export class PieceCannonComponent implements OnInit {
     this.role = role;
   }
 
+  validateMove() {
+    return true;
+  }
+
 }

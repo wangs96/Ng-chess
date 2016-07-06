@@ -29,4 +29,7 @@ export class PieceGuardComponent implements OnInit {
     this.role = role;
   }
 
+  validateMove() {
+    return true;
+  }
 }

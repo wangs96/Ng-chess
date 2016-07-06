@@ -142,12 +142,15 @@ export class ChessBoardComponent implements OnInit {
       }
       else {
         if(this.selectedPiece) {
-          //Eat enemy piece
-          this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
-          this.selectedPiece.setCoordinate(coordInfo.coordinate);
-          coordInfo.piece.destroyed = true;
-          coordInfo.piece = this.selectedPiece;
-          this.switchGamer();
+          //Validate move before move piece
+          if(this.selectedPiece.validateMove(coordInfo.coordinate)) {
+            //Eat enemy piece
+            this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
+            this.selectedPiece.setCoordinate(coordInfo.coordinate);
+            coordInfo.piece.destroyed = true;
+            coordInfo.piece = this.selectedPiece;
+            this.switchGamer();
+          }
         }
 
         this.unselectedPieces();
@@ -155,11 +158,13 @@ export class ChessBoardComponent implements OnInit {
     }
     else {
       if(this.selectedPiece) {
-        //move piece
-        this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
-        this.selectedPiece.setCoordinate(coordInfo.coordinate);
-        coordInfo.piece = this.selectedPiece;
-        this.switchGamer();
+        if(this.selectedPiece.validateMove(coordInfo.coordinate)) {
+          //move piece
+          this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
+          this.selectedPiece.setCoordinate(coordInfo.coordinate);
+          coordInfo.piece = this.selectedPiece;
+          this.switchGamer();
+        }
       }
 
       this.unselectedPieces();

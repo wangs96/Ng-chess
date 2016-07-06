@@ -29,4 +29,46 @@ export class PieceMinionComponent implements OnInit {
     this.role = role;
   }
 
+  validateMove(coord) {
+    var currentX = this.coordinate[0];
+    var currentY = this.coordinate[1];
+    var targetX = coord[0];
+    var targetY = coord[1];
+
+    if(this.role === 'red') {
+      //minion can only move forward or left right
+      if(targetY <= currentY) {
+        //if minion has crossed the river
+        if(currentY <= 4) {
+          //minion can move forward 1 tile or move left right 1 tile
+          return ((currentY - targetY) === 1 && currentX === targetX)
+            || (Math.abs(currentX - targetX) === 1 && currentY === targetY);
+        }
+        //if minion not cross river
+        else {
+          //minion can only move forward 1 tile
+          return (currentY - targetY) === 1 && currentX === targetX;
+        }
+      }
+    }
+    else {
+      //minion can only move forward or left right
+      if(targetY >= currentY) {
+        //if minion has crossed the river
+        if(currentY >= 5) {
+          //minion can move forward 1 tile or move left right 1 tile
+          return ((targetY - currentY) === 1 && currentX === targetX)
+            || (Math.abs(currentX - targetX) === 1 && currentY === targetY);
+        }
+        //if minion not cross river
+        else {
+          //minion can only move forward 1 tile
+          return (targetY - currentY) === 1 && currentX === targetX;
+        }
+      }
+    }
+
+    return false;
+  }
+
 }
