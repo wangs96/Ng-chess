@@ -29,7 +29,7 @@ export class PieceMinisterComponent implements OnInit {
     this.role = role;
   }
 
-  validateMove(coord) {
+  validateMove(coord, boardCoordinate) {
     var currentX = this.coordinate[0];
     var currentY = this.coordinate[1];
     var targetX = coord[0];
@@ -42,10 +42,22 @@ export class PieceMinisterComponent implements OnInit {
     if(Math.abs(xMovement) === 2 && Math.abs(yMovement) === 2) {
       //minister can not move over river
       if((this.role === 'red' && targetY > 4) || (this.role === 'black' && targetY < 5)) {
-        return true;
+        return validateBlocking(boardCoordinate, [currentX, currentY], [xMovement, yMovement]);
       }
     }
 
     return false;
+
+    function validateBlocking(boardCoordinate, startPointCoord, movementCoord) {
+      var blockingTileCoordinate = [];
+
+      //if there is a piece at the minister heart, it will block minister from moving
+      blockingTileCoordinate = [startPointCoord[0] + movementCoord[0] / 2, startPointCoord[1] + movementCoord[1] / 2];
+
+      return !boardCoordinate.filter((tile) => {
+        return tile.coordinate[0] === blockingTileCoordinate[0] && tile.coordinate[1] === blockingTileCoordinate[1] && tile.piece
+      }).length;
+    }
   }
+
 }

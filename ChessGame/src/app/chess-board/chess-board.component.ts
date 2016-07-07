@@ -143,7 +143,7 @@ export class ChessBoardComponent implements OnInit {
       else {
         if(this.selectedPiece) {
           //Validate move before move piece
-          if(this.selectedPiece.validateMove(coordInfo.coordinate, this.coordinate)) {
+          if(this.selectedPiece.validateMove(coordInfo.coordinate, this.coordinate, true)) {
             //Eat enemy piece
             this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
             this.selectedPiece.setCoordinate(coordInfo.coordinate);
@@ -158,7 +158,7 @@ export class ChessBoardComponent implements OnInit {
     }
     else {
       if(this.selectedPiece) {
-        if(this.selectedPiece.validateMove(coordInfo.coordinate, this.coordinate)) {
+        if(this.selectedPiece.validateMove(coordInfo.coordinate, this.coordinate, false)) {
           //move piece
           this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
           this.selectedPiece.setCoordinate(coordInfo.coordinate);
@@ -182,11 +182,50 @@ export class ChessBoardComponent implements OnInit {
   }
 
   switchGamer() {
-    if(this.mode === 'single') {
-      this.currentRole = this.currentRole === 'red'?'black':'red';
-      console.log('This is ' + this.currentRole + ' turn.');
+    if(this.isMarshalInDuel()) {
+      this.marshalComponents.toArray().forEach((marshalPiece) => {
+        if(marshalPiece.role === this.currentRole) {
+          marshalPiece.destroyed = true;
+        }
+      });
+    }
+
+    if(this.isGameOver().length) {
+      var gameOverMessage = 'The ' + this.currentRole + ' is ' +
+        (this.currentRole === this.isGameOver()[0].role? 'Defeated': 'Victory');
+
+      setTimeout(() => {
+        alert(gameOverMessage);
+      }, 1000);
+    }
+    else {
+      if(this.mode === 'single') {
+        this.currentRole = this.currentRole === 'red'?'black':'red';
+        console.log('This is ' + this.currentRole + ' turn.');
+      }
     }
 
   }
 
+  isGameOver() {
+    return this.marshalComponents.toArray().filter((marshalPiece) => {
+      return marshalPiece.destroyed;
+    });
+  }
+
+  isMarshalInDuel() {
+    var marshals = this.marshalComponents.toArray();
+
+    //check if the marshals are in the same line
+    if(marshals[0].coordinate[0] === marshals[1].coordinate[0]) {
+      //get the y range of marshal line
+      //the y range between black marshal and red marshal
+      return !this.coordinate.filter((tile) => {
+        return tile.coordinate[0] === marshals[0].coordinate[0] && tile.coordinate[1] > marshals[0].coordinate[1]
+          && tile.coordinate[1] < marshals[1].coordinate[1] && tile.piece;
+      }).length;
+    }
+
+    return false;
+  }
 }
