@@ -29,7 +29,23 @@ export class PieceMinisterComponent implements OnInit {
     this.role = role;
   }
 
-  validateMove() {
-    return true;
+  validateMove(coord) {
+    var currentX = this.coordinate[0];
+    var currentY = this.coordinate[1];
+    var targetX = coord[0];
+    var targetY = coord[1];
+
+    var xMovement = targetX - currentX;
+    var yMovement = targetY - currentY;
+
+    //minister can only move to square diagonal corner
+    if(Math.abs(xMovement) === 2 && Math.abs(yMovement) === 2) {
+      //minister can not move over river
+      if((this.role === 'red' && targetY > 4) || (this.role === 'black' && targetY < 5)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

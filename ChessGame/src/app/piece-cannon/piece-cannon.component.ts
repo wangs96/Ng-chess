@@ -29,8 +29,21 @@ export class PieceCannonComponent implements OnInit {
     this.role = role;
   }
 
-  validateMove() {
-    return true;
+  validateMove(coord) {
+    var currentX = this.coordinate[0];
+    var currentY = this.coordinate[1];
+    var targetX = coord[0];
+    var targetY = coord[1];
+
+    var xMovement = targetX - currentX;
+    var yMovement = targetY - currentY;
+
+    if(xMovement === 0 || yMovement === 0) {
+      //TODO: will add blocking check
+      return true;
+    }
+    
+    return false;
   }
 
 }

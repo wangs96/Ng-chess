@@ -143,7 +143,7 @@ export class ChessBoardComponent implements OnInit {
       else {
         if(this.selectedPiece) {
           //Validate move before move piece
-          if(this.selectedPiece.validateMove(coordInfo.coordinate)) {
+          if(this.selectedPiece.validateMove(coordInfo.coordinate, this.coordinate)) {
             //Eat enemy piece
             this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
             this.selectedPiece.setCoordinate(coordInfo.coordinate);
@@ -158,7 +158,7 @@ export class ChessBoardComponent implements OnInit {
     }
     else {
       if(this.selectedPiece) {
-        if(this.selectedPiece.validateMove(coordInfo.coordinate)) {
+        if(this.selectedPiece.validateMove(coordInfo.coordinate, this.coordinate)) {
           //move piece
           this.getCoordInfo(this.selectedPiece.coordinate).piece = null;
           this.selectedPiece.setCoordinate(coordInfo.coordinate);
