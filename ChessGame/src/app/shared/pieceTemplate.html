@@ -1,0 +1,6 @@
+<div class="piece" [ngStyle]="{'left': coordinate[0]*100 + 'px', 'top': coordinate[1]*100 + 'px'}"
+    [ngClass]="{'red': role === 'red', 'black': role === 'black', 'selected': selected, 'destroyed': destroyed}">
+  <div class="content">
+    {{content}}
+  </div>
+</div>
