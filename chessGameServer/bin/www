@@ -7,14 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('chessGameServer:server');
 var http = require('http');
-//Require socket.io library
-var io = require('socket.io')(http);
-var socketSetting = require('../socketSetting');
-
-/**
- * Set socket to the app
- */
-io.on('connection', socketSetting);
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +20,15 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+//Require socket.io library
+var io = require('socket.io')(server);
+var socketSetting = require('../socketSetting');
+
+/**
+ * Set socket to the app
+ */
+io.on('connection', socketSetting);
 
 /**
  * Listen on provided port, on all network interfaces.

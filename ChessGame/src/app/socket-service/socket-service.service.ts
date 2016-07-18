@@ -4,12 +4,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SocketServiceService {
 
+  public socket = io();
+
   constructor() {
-    console.log(io);
+
   }
 
   initSocket() {
-    console.log(io);
+
   }
 
 }
