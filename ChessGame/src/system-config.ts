@@ -7,10 +7,14 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'socket.io-client': 'vendor/socket.io-client/socket.io.js'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'socket.io-client': {
+    format: 'cjs'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

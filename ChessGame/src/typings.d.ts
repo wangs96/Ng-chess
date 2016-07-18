@@ -4,3 +4,8 @@
 
 // / <reference path="../typings/browser.d.ts" />
 declare var module: { id: string };
+
+declare module 'socket.io-client' {
+  var socket: any;
+  export = socket;
+}
