@@ -1,0 +1,41 @@
+.container {
+  padding: 0 15px;
+}
+
+.dialog {
+  width: 500px;
+  height: 400px;
+  margin: 100px auto;
+  padding: 15px;
+  border: 15px solid transparent;
+  border-image:url("/img/border-image.png") 400 500 stretch;
+}
+
+.heading {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 100px;
+}
+
+.content {
+  text-align: center;
+}
+
+.btn-primary {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  color: rgba(255,255,255,0.87);
+  background-color: rgb(16,108,200);
+  border-radius: 3px;
+  align-items: center;
+  padding: 0 6px;
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  line-height: 36px;
+  min-height: 36px;
+  min-width: 88px;
+}
+
+.btn-primary:hover {
+  background-color: rgb(1,89,162)
+}

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ChessBoardComponent } from './chess-board/chess-board.component';
+//import { ChessBoardComponent } from './chess-board/chess-board.component';
 import { SocketServiceService } from './socket-service/socket-service.service';
+import { ROUTER_DIRECTIVES }  from '@angular/router';
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [ChessBoardComponent],
+  directives: [ROUTER_DIRECTIVES],
   providers: [SocketServiceService]
 })
 
