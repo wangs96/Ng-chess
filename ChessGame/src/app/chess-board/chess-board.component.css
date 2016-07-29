@@ -2,6 +2,7 @@
   width: 800px;
   margin: 50px auto;
   position: relative;
+  transform-origin: 0 0;
 }
 
 .chess-board {

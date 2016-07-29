@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SocketServiceService } from "../socket-service/socket-service.service";
 
 @Component({
   moduleId: module.id,
@@ -11,14 +12,18 @@ export class HomeComponent implements OnInit {
 
   public userName: string = '';
 
-  constructor(private router:Router) {}
+  constructor(private router:Router, private socketService: SocketServiceService) {}
 
   ngOnInit() {
+    this.socketService.socket.on('socket.login', (message) => {
+      this.router.navigate(['/chess-game']);
+      console.log(message);
+    });
   }
 
   playGame() {
     console.log(this.userName);
-    this.router.navigate(['/chess-game']);
+    this.socketService.userLogin(this.userName);
   }
 
 }

@@ -10,6 +10,12 @@ export class SocketServiceService {
 
   }
 
+  userLogin(userName) {
+    this.socket.emit('socket.userJoin', {
+      userName: userName
+    });
+  }
+
   initSocket() {
 
   }

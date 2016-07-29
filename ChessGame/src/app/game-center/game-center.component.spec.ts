@@ -10,11 +10,11 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { GameCenterComponent } from './game-center.component';
 
-describe('Component: Home', () => {
-  //it('should create an instance', () => {
-  //  let component = new HomeComponent();
-  //  expect(component).toBeTruthy();
-  //});
+describe('Component: GameCenter', () => {
+  it('should create an instance', () => {
+    let component = new GameCenterComponent();
+    expect(component).toBeTruthy();
+  });
 });

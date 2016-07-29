@@ -6,6 +6,7 @@ import { PieceHorseComponent } from '../piece-horse/piece-horse.component';
 import { PieceMinisterComponent } from '../piece-minister/piece-minister.component';
 import { PieceGuardComponent } from '../piece-guard/piece-guard.component';
 import { PieceMarshalComponent } from '../piece-marshal/piece-marshal.component';
+import { SocketServiceService } from "../socket-service/socket-service.service";
 
 @Component({
   moduleId: module.id,
@@ -42,15 +43,25 @@ export class ChessBoardComponent implements OnInit {
   public mode: string = 'single';
   private selectedPiece = null;
   private currentRole: string = 'red';
+  private scale;
 
-  constructor() {}
+  constructor(private socketService: SocketServiceService) {
+
+  }
 
   ngOnInit() {
     this.initBoardCoordinate();
+    this.setBoardScale();
   }
 
   ngAfterViewInit() {
     this.initPieceCoordinate();
+  }
+
+  setBoardScale() {
+    var windowHeight = window.innerHeight;
+    var scale = (windowHeight/1100).toFixed(2);
+    this.scale = scale || 1;
   }
 
   initPieceCoordinate() {

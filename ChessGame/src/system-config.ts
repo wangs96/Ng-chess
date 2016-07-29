@@ -46,6 +46,7 @@ const barrels: string[] = [
   'app/piece-guard',
   'app/piece-marshal',
   'app/home',
+  'app/game-center',
   /** @cli-barrel */
 ];
 
